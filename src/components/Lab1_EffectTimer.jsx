@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 
 // LAB 1 (Slide 07): useEffect Timer
@@ -10,6 +11,14 @@ export default function Lab1EffectTimer() {
     // TODO 2: 만든 타이머 ID를 보관
     // TODO 3: return Cleanup 함수에서 clearInterval 호출
     // TODO 4: Dependency Array가 []일 때와 생략했을 때의 차이 관찰
+
+    const timer = setInterval(() => {
+      setCount(prev => prev + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   return (
