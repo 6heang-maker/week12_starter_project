@@ -1,25 +1,96 @@
-# OSS Week 12 — React Hooks Playground (Student Starter)
+1. 프로젝트 소개
 
-## 실행 방법
-Node.js 20.19+ 또는 22.12+ 권장. 프로젝트 폴더에서 실행:
+- React의 useEffect와 useRef를 사용하는 프로젝트
+- https://github.com/2026-2-OSS/week12_starter_project
 
-```bash
-npm install
-npm run dev
-```
+2. 실행 방법
 
-브라우저에 터미널의 Local URL을 열고 LAB 탭을 이동하세요. 제출 전 `npm run build`도 실행하세요.
+npm.cmd install
 
-## 수행 방법
-1. `src/components/` 아래의 LAB 1~4 파일에 있는 `TODO`를 직접 완성합니다.
-2. `src/App.jsx`, `src/App.css`는 공통 화면이므로 가급적 수정하지 않습니다.
-3. 각 LAB의 동작 화면과 콘솔 결과를 기록합니다.
-4. 한 LAB에서 다른 LAB으로 탭을 전환하면 기존 컴포넌트가 언마운트됩니다. Cleanup 결과를 관찰합니다.
+npm.cmd run dev
 
+![](capture/1.png)
 
-## 이해도 확인 질문
-1. `setCount(prev => prev + 1)`은 왜 유용한가?
-2. `useEffect(fn, [])`과 `useEffect(fn)`은 어떻게 다른가?
-3. Cleanup은 언제 실행되는가? 개발 환경 StrictMode 영향은?
-4. `useState`와 `useRef`의 값 변경 시 렌더링 차이는?
-5. LAB 2와 LAB 4에서 Timer를 관리하는 방식의 차이는?
+3. 소스코드 분석
+
+- App.jsx: 전체 화면 및 LAB 선택
+- App.css: 화면 디자인
+- components: LAB 1,2,3,4 기능
+- useEffect: 조건에 따라 코드 실행
+- Cleanup: 타이머 정리
+- useRef: 값이나 HTML 요소
+- useState: 값 변경 시 화면 다시
+
+코드 1 - useEffect
+
+useEffect(() => {
+    const timer = setInterval(() => {
+    setCount(prev => prev + 1);
+    }, 1000);
+
+    return () => {
+    clearInterval(timer);
+    };
+}, []);
+
+설명: 1초마다 Count를 증가시키고 Cleanup으로 타이머를 정리
+
+코드 2 - useRef
+
+const inputRef = useRef(null);
+
+const focusInput = () => {
+    inputRef.current.focus();
+};
+
+const clearInput = () => {
+    inputRef.current.value = '';
+    inputRef.current.focus();
+};
+
+설명: 입력창에 커서를 이동하거나 입력한 내용을 지움
+
+4. LAB 구현
+
+- LAB 1: 1초마다 Count 증가
+- LAB 2: Start, Stop, Reset 구현
+- LAB 3: Focus, Clear 구현
+- LAB 4: useRef로 타이머 관리 및 Cleanup
+
+![](capture/2.png)
+![](capture/3.png)
+![](capture/4.png)
+![](capture/5.png)
+
+5. LAB 비교 분석
+
+1) Dependency Array: Effect가 다시 실행되는 조건을 정한다.
+2) Cleanup: 없으면 타이머가 중복 실행될 수 있다.
+3) useState와 useRef: useState는 값 변경 시 다시 렌더링하지만 useRef는 그렇지 않다.
+4) LAB 2와 LAB 4: LAB 2는 running State와 useEffect, LAB 4는 useRef로 타이머를 관리한다.
+
+6. Customizing
+
+- App.jsx: 한국어로 변경
+- App.css: 하늘색, 연보라색으로 변경
+
+7. Deployment
+
+Vercel:
+
+8. Weekly Review
+
+새롭게 배운 내용
+
+1) useEffect로 타이머 실행
+2) Cleanup으로 타이머 정리
+3) useRef로 타이머 관리
+
+어려웠던 점과 해결 방법
+
+- 처음에 코드를 이해하고 뭘 해야하는지 알아보는 것에서 어려워서 오래보고 ai에게 물어보기도 하면서 코드를 이해하고 무엇을 하고 어떻게 작성해야하는지에 대해 알게 된 것 같다.  
+
+AI 활용
+
+- 처음에 코드를 이해하고 뭘 해야하는지 알아보는 것에서 사용했고 내가 작성한 내용이 맞는지에 대해서 확인하면서 사용했다. 
+- 오류가 일어났고 오류가 왜 일어났는지 확인하면서 ai를 사용했다. 
