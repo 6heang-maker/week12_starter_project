@@ -76,7 +76,7 @@ const clearInput = () => {
 
 7. Deployment
 
-Vercel:
+Vercel: https://week12-starter-project-henna.vercel.app/
 
 8. Weekly Review
 
